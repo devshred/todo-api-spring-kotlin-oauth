@@ -1,0 +1,12 @@
+{
+  "apiPackage": "todo.api",
+  "modelPackage": "todo.model",
+  "sourceFolder": "src/main/kotlin",
+  "documentationProvider": "none",
+  "openApiNullable": "false",
+  "useSwaggerAnnotations": "false",
+  "dateLibrary": "java8",
+  "useTags": "true",
+  "interfaceOnly": "true",
+  "useSpringBoot3": "true"
+}

@@ -1,0 +1,54 @@
+### Get JWT-token.
+POST {{keycloakUrl}}/realms/{{keycloakRealm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id={{keycloakClientId}}&username={{keycloakUser}}&password={{keycloakPassword}}
+
+> {% client.global.set("auth_token", response.body.access_token) %}
+
+### Create first todo item.
+POST {{baseUrl}}/v1/todo
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "text": "Do something",
+  "done": false
+}
+
+> {% client.global.set("todo_id", response.body.id) %}
+
+### Create second todo item.
+POST {{baseUrl}}/v1/todo
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "text": "Do something else",
+  "done": false
+}
+
+### Get all items.
+GET {{baseUrl}}/v1/todo/
+Authorization: Bearer {{auth_token}}
+
+### Get an item.
+GET {{baseUrl}}/v1/todo/{{todo_id}}
+Authorization: Bearer {{auth_token}}
+
+### Update status of an item.
+PATCH {{baseUrl}}/v1/todo/{{todo_id}}
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "done": true
+}
+
+### Delete an item.
+DELETE {{baseUrl}}/v1/todo/{{todo_id}}
+Authorization: Bearer {{auth_token}}
+
+### Delete all items.
+DELETE {{baseUrl}}/v1/todo
+Authorization: Bearer {{auth_token}}
