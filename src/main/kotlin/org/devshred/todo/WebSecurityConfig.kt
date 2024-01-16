@@ -2,6 +2,7 @@ package org.devshred.todo
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.http.HttpMethod.DELETE
 import org.springframework.http.HttpMethod.GET
 import org.springframework.http.HttpMethod.OPTIONS
@@ -19,6 +20,7 @@ private const val ROLE_USER = "user"
 
 @Configuration
 @EnableWebSecurity
+@Profile("!test")
 class WebSecurityConfig(private val jwtConverter: JwtConverter) {
 
     @Bean

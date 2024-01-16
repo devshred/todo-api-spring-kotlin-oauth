@@ -15,12 +15,12 @@ class TodoService(val db: TodoRepository) {
 
     fun allTodoItems(): List<TodoItem> {
         val owner = currentUserOrFail
-        return db.findByOwner(owner).map { entity -> entity.toTodoItem() }
+        return db.findByOwnerOrderByPriority(owner).map { entity -> entity.toTodoItem() }
     }
 
     fun save(dto: CreateTodoItem): TodoItem {
         val owner = currentUserOrFail
-        return db.save(toEntity(dto, owner)).toTodoItem()
+        return db.saveAndRefresh(toEntity(dto, owner)).toTodoItem()
     }
 
     fun findById(id: UUID): TodoItem {
@@ -60,7 +60,7 @@ class TodoService(val db: TodoRepository) {
 
     companion object {
         private fun toEntity(todoItem: CreateTodoItem, owner: String): TodoEntity {
-            return TodoEntity(owner = owner, text = todoItem.text, done = false, id = null)
+            return TodoEntity(owner = owner, text = todoItem.text)
         }
     }
 }

@@ -11,10 +11,11 @@ import java.util.*
 @Entity
 @Table(name = "todos")
 class TodoEntity(
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID?,
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: UUID? = null,
     val owner: String,
     val text: String,
-    var done: Boolean
+    var done: Boolean = false,
+    var priority: Int? = null
 ) {
-    fun toTodoItem() = TodoItem(id, text, done)
+    fun toTodoItem() = TodoItem(id, text, done, priority)
 }

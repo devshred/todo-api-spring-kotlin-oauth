@@ -150,6 +150,9 @@ components:
         done:
           type: boolean
           description: Indicates, if the todo is already done.
+        priority:
+          type: integer
+          description: Defines the ordering. Ascending, from low to high.
     CreateTodoItem:
       type: object
       required:

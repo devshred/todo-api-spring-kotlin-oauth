@@ -1,6 +1,7 @@
 package org.devshred.todo
 
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Profile
 import org.springframework.core.convert.converter.Converter
 import org.springframework.security.authentication.AbstractAuthenticationToken
 import org.springframework.security.core.GrantedAuthority
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component
 import java.util.stream.Collectors
 
 @Component
+@Profile("!test")
 class JwtConverter : Converter<Jwt, AbstractAuthenticationToken> {
 
     @Value("\${app.jwt-converter.resource-id}")
