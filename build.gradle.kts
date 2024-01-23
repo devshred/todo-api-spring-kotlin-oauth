@@ -42,7 +42,7 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers:1.19.3")
     testImplementation("org.testcontainers:postgresql:1.19.3")
     testImplementation("org.apache.commons:commons-lang3:3.14.0")
-
+    testImplementation("com.ninja-squad:springmockk:4.0.2")
 }
 
 val generatedOpenApiSourcesDir = "${layout.buildDirectory.get()}/generated-openapi"

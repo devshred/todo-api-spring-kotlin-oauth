@@ -8,5 +8,17 @@ interface TodoRepository : CrudRepository<TodoEntity, UUID>, RefreshableReposito
 
     fun findByIdAndOwner(id: UUID, owner: String): Optional<TodoEntity>
 
+    fun findByOwnerAndPriorityGreaterThanEqualAndPriorityLessThan(
+        owner: String,
+        priorityLowerBoundary: Int,
+        priorityUpperBoundary: Int
+    ): Iterable<TodoEntity>
+
+    fun findByOwnerAndPriorityGreaterThanAndPriorityLessThanEqual(
+        owner: String,
+        priorityLowerBoundary: Int,
+        priorityUpperBoundary: Int
+    ): Iterable<TodoEntity>
+
     fun deleteByOwner(owner: String)
 }

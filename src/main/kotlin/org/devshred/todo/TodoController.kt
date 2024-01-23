@@ -35,7 +35,7 @@ class TodoController(val service: TodoService) : TodoApi {
 
     override fun createTodoItem(createTodoItem: CreateTodoItem): ResponseEntity<TodoItem> {
         log.info("create item: {}", createTodoItem)
-        val todoItem: TodoItem = service.save(createTodoItem)
+        val todoItem: TodoItem = service.save(createTodoItem).toTodoItem()
         return ResponseEntity.created(URI.create("/" + todoItem.id)).body(todoItem)
     }
 

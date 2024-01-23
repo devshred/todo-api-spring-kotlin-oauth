@@ -15,7 +15,7 @@ class TodoEntity(
     val owner: String,
     val text: String,
     var done: Boolean = false,
-    var priority: Int? = null
+    var priority: Int = 0
 ) {
     fun toTodoItem() = TodoItem(id, text, done, priority)
 }
