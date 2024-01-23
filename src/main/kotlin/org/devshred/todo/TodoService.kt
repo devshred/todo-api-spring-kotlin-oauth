@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional
 import todo.model.CreateTodoItem
 import todo.model.TodoItem
 import todo.model.TodoStatus
-import java.util.*
+import java.util.UUID
 
 @Service
 class TodoService(val db: TodoRepository) {
@@ -28,7 +28,10 @@ class TodoService(val db: TodoRepository) {
         return db.findByIdAndOwner(id, owner).map(TodoEntity::toTodoItem).orElseThrow { NotFoundException() }
     }
 
-    fun updateStatus(id: UUID, status: TodoStatus) {
+    fun updateStatus(
+        id: UUID,
+        status: TodoStatus,
+    ) {
         val owner = currentUserOrFail
         val entity: TodoEntity = db.findByIdAndOwner(id, owner).orElseThrow { NotFoundException() }
         entity.done = status.done
@@ -52,7 +55,10 @@ class TodoService(val db: TodoRepository) {
      * This can be done with a single native query, but to avoid caching-issues each entity will be saved separately to keep ORM-cache up-to-date.
      */
     @Transactional
-    fun changePriority(todoItem: TodoEntity, newPriority: Int) {
+    fun changePriority(
+        todoItem: TodoEntity,
+        newPriority: Int,
+    ) {
         if (todoItem.priority == newPriority || newPriority < 1) {
             log.debug("Nothing to change. Current priority: ${todoItem.priority}, new priority: $newPriority")
             return
@@ -91,7 +97,10 @@ class TodoService(val db: TodoRepository) {
         }
 
     companion object {
-        private fun toEntity(todoItem: CreateTodoItem, owner: String): TodoEntity {
+        private fun toEntity(
+            todoItem: CreateTodoItem,
+            owner: String,
+        ): TodoEntity {
             return TodoEntity(owner = owner, text = todoItem.text)
         }
     }

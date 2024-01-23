@@ -15,7 +15,6 @@ import java.util.stream.Collectors
 @Component
 @Profile("!test")
 class JwtConverter : Converter<Jwt, AbstractAuthenticationToken> {
-
     @Value("\${app.jwt-converter.resource-id}")
     lateinit var resourceId: String
 
@@ -42,9 +41,7 @@ class JwtConverter : Converter<Jwt, AbstractAuthenticationToken> {
         val resourceRoles = resource["roles"] as? Collection<String> ?: return emptySet()
 
         return resourceRoles.stream().map { role: String ->
-            SimpleGrantedAuthority(
-                "ROLE_$role"
-            )
+            SimpleGrantedAuthority("ROLE_$role")
         }.collect(Collectors.toSet())
     }
 }

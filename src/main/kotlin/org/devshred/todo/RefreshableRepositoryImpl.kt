@@ -8,7 +8,7 @@ import java.io.Serializable
 
 class RefreshableRepositoryImpl<T : Any, ID : Serializable>(
     entityInformation: JpaEntityInformation<T, ID>,
-    private val entityManager: EntityManager
+    private val entityManager: EntityManager,
 ) :
     SimpleJpaRepository<T, ID>(entityInformation, entityManager), RefreshableRepository<T, ID> {
     @Transactional

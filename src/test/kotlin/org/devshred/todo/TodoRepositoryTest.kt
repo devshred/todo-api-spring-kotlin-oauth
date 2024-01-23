@@ -12,7 +12,6 @@ import org.springframework.test.context.TestPropertySource
 @TestPropertySource(locations = ["/application.yaml"])
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class TodoRepositoryTest {
-
     @Autowired
     private lateinit var db: TodoRepository
 

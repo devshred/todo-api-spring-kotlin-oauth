@@ -52,9 +52,8 @@ class TodoServiceIntegrationTest {
 
         val changedItems = service.allTodoItems()
 
-        assertThat(changedItems.map { it.text }).containsExactly(
-            "Task 1", "Task 4", "Task 2", "Task 3", "Task 5"
-        )
+        assertThat(changedItems.map { it.text })
+            .containsExactly("Task 1", "Task 4", "Task 2", "Task 3", "Task 5")
     }
 
     @Test
@@ -69,9 +68,8 @@ class TodoServiceIntegrationTest {
 
         val changedItems = service.allTodoItems()
 
-        assertThat(changedItems.map { it.text }).containsExactly(
-            "Task 1", "Task 3", "Task 4", "Task 2", "Task 5"
-        )
+        assertThat(changedItems.map { it.text })
+            .containsExactly("Task 1", "Task 3", "Task 4", "Task 2", "Task 5")
     }
 
     @Test
@@ -86,9 +84,8 @@ class TodoServiceIntegrationTest {
 
         val changedItems = service.allTodoItems()
 
-        assertThat(changedItems.map { it.text }).containsExactly(
-            "Task 1", "Task 3", "Task 4", "Task 5", "Task 2"
-        )
+        assertThat(changedItems.map { it.text })
+            .containsExactly("Task 1", "Task 3", "Task 4", "Task 5", "Task 2")
     }
 
     @Test
@@ -103,8 +100,7 @@ class TodoServiceIntegrationTest {
 
         val changedItems = service.allTodoItems()
 
-        assertThat(changedItems.map { it.text }).containsExactly(
-            "Task 1", "Task 2", "Task 3", "Task 4", "Task 5"
-        )
+        assertThat(changedItems.map { it.text })
+            .containsExactly("Task 1", "Task 2", "Task 3", "Task 4", "Task 5")
     }
 }

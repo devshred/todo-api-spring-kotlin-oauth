@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import todo.model.TodoItem
-import java.util.*
+import java.util.UUID
 
 @Entity
 @Table(name = "todos")
@@ -15,7 +15,7 @@ class TodoEntity(
     val owner: String,
     val text: String,
     var done: Boolean = false,
-    var priority: Int = 0
+    var priority: Int = 0,
 ) {
     fun toTodoItem() = TodoItem(id, text, done, priority)
 }

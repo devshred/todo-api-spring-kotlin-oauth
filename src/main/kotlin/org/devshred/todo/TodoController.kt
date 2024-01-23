@@ -12,7 +12,7 @@ import todo.model.CreateTodoItem
 import todo.model.TodoItem
 import todo.model.TodoStatus
 import java.net.URI
-import java.util.*
+import java.util.UUID
 
 @RestController
 @AllArgsConstructor
@@ -27,7 +27,10 @@ class TodoController(val service: TodoService) : TodoApi {
         return ResponseEntity.ok(service.allTodoItems())
     }
 
-    override fun changeTodoItem(id: UUID, todoStatus: TodoStatus): ResponseEntity<Unit> {
+    override fun changeTodoItem(
+        id: UUID,
+        todoStatus: TodoStatus,
+    ): ResponseEntity<Unit> {
         log.info("change status of {} to {}", id, todoStatus)
         service.updateStatus(id, todoStatus)
         return ResponseEntity.noContent().build()

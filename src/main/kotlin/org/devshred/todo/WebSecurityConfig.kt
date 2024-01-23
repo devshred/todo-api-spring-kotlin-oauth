@@ -22,7 +22,6 @@ private const val ROLE_USER = "user"
 @EnableWebSecurity
 @Profile("!test")
 class WebSecurityConfig(private val jwtConverter: JwtConverter) {
-
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http {

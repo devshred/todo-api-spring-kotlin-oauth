@@ -4,7 +4,8 @@ plugins {
     id("org.springframework.boot") version "3.1.5"
     id("io.spring.dependency-management") version "1.1.3"
     id("org.openapi.generator") version "7.2.0"
-    id("com.github.ben-manes.versions") version "0.50.0"
+    id("com.github.ben-manes.versions") version "0.51.0"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 
     val kotlinVersion = "1.9.10"
     kotlin("jvm") version kotlinVersion
@@ -75,9 +76,10 @@ tasks {
         resolutionStrategy {
             componentSelection {
                 all {
-                    val rejected = listOf("alpha", "beta", "rc", "cr", "m", "preview", "b", "ea")
-                        .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-+]*") }
-                        .any { it.matches(candidate.version) }
+                    val rejected =
+                        listOf("alpha", "beta", "rc", "cr", "m", "preview", "b", "ea")
+                            .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-+]*") }
+                            .any { it.matches(candidate.version) }
                     if (rejected) {
                         reject("Release candidate")
                     }
@@ -86,3 +88,13 @@ tasks {
         }
     }
 }
+
+ktlint {
+    filter {
+        exclude { entry ->
+            entry.file.toString().contains("generated-openapi")
+        }
+    }
+}
+
+tasks.named("runKtlintCheckOverMainSourceSet").configure { dependsOn("openApiGenerate") }
